@@ -26,3 +26,22 @@ loop acc [] = acc
 loop acc (x:xs) = let acc' = acc * 10 + digitToInt x
                   in loop acc' xs
                   
+++++++++++++++++++++++++++++++++
+对列表元素进行转换
+
+考虑以下 C 函数， square ，它对数组中的所有元素执行平方计算：
+
+void square(double *out, const double *in, size_t length)
+{
+    for (size_t i = 0; i < length; i++) {
+        out[i] = in[i] * in[i];
+    }
+}
+这段代码展示了一个直观且常见的 loop 动作，它对输入数组中的所有元素执行同样的动作。
+
+以下是 Haskell 版本的 square 函数：
+-- file: ch04/square.hs
+square :: [Double] -> [Double]
+square (x:xs) = x*x : square xs
+square [] = []
+
