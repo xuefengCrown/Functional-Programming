@@ -1,0 +1,28 @@
+-- 通过一个例子来看命令式语言（C） 和 函数式语言（Haskell）
+--  ::[Char] --> Int
+"357" --> 357
+
+***C***
+int as_int(char *str)
+{
+    int acc; // accumulate the partial result
+    for (acc = 0; isdigit(*str); str++){
+        acc = acc * 10 + (*str -'0');
+    }
+
+    return acc;
+}
+
+***Haskell***
+
+-- file: ch04/IntParse.hs
+-- 只载入 Data.Char 中的 digitToInt 函数
+import Data.Char (digitToInt)
+
+asInt xs = loop 0 xs
+
+loop :: Int -> String -> Int
+loop acc [] = acc
+loop acc (x:xs) = let acc' = acc * 10 + digitToInt x
+                  in loop acc' xs
+                  
